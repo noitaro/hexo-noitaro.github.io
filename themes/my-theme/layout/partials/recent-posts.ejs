@@ -1,0 +1,12 @@
+<% if (page.posts.length> 0) { %>
+  <h2 class="docs-header">新着記事・更新記事</h2>
+  <ul>
+    <% page.posts.sort('date', -1).limit(10).each(post=> { %>
+      <li>
+        <a href="<%=url_for(post.path)%>">
+          <%=post.title%>
+        </a>
+      </li>
+    <% }); %>
+  </ul>
+  <% } %>

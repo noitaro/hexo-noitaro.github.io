@@ -1,0 +1,72 @@
+<% var pageTitle=page.title || config.subtitle || '' ; if (is_archive()) pageTitle='Archives' ; if (is_tag())
+  pageTitle='Tag: ' + page.tag; if (is_category()) pageTitle='Category: ' + page.category; if (is_month()) pageTitle
+  +=': ' + page.month + '/' + page.year; if (is_year()) pageTitle +=': ' + page.year; pageTitle +=' [ ' + config.title
+  + ' ]' ; %>
+
+  <!DOCTYPE html>
+  <html lang="<%=config.language%>">
+
+  <head>
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="UTF-8">
+    <title>
+      <%=pageTitle%>
+    </title>
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <% if (theme.stylesheets !==undefined && theme.stylesheets.length> 0) { %>
+      <% theme.stylesheets.forEach(url=> { %>
+        <link rel="stylesheet" href="<%=url%>">
+        <% }); %>
+          <% } %>
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+  </head>
+
+  <body>
+    <!-- Primary Page Layout
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="container">
+      <section class="header">
+        <h1 class="title">
+          <a class="title-link" href="/"><%=config.title%></a>
+        </h1>
+      </section>
+
+      <div class="navbar-spacer"></div>
+      <nav class="navbar">
+        <div class="container">
+          <ul class="navbar-list">
+            <% Object.keys(theme.menu).forEach(key=> { %>
+            <li class="navbar-item">
+              <a class="navbar-link" href="<%=theme.menu[key]%>"><%=key%></a>
+            </li>
+            <% }); %>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="docs-section">
+        <%- body %>
+      </div>
+    </div>
+
+    <% if (theme.scripts !==undefined && theme.scripts.length> 0) { %>
+      <% theme.scripts.forEach(url=> { %>
+        <script src="<%=url%>"></script>
+        <% }); %>
+          <% } %>
+    <!-- End Document
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  </body>
+
+  </html>
